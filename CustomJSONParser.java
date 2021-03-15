@@ -9,7 +9,7 @@ import java.io.BufferedReader;
 import java.io.Reader;
 import org.json.simple.*;
 import org.json.simple.parser.*;
-
+import java.util.*;
 // note: to compile and run this code, you will need to tell java how to find the org.json.simple package. There is a jar file in the local directory which has the package. So we will update the CLASSPATH variable through the terminal to show Java where to look for imported classes.
 // in bash, this is done with the following line
 // export CLASSPATH=$CLASSPATH:./org-json-simple.jar
@@ -70,6 +70,31 @@ public class CustomJSONParser {
 				System.out.print(info);
 			}
 		}
+		//Search for the character names in a house
+		ArrayList<String> houses = new ArrayList<String>();
+		houses.add("Gryffindor");
+        houses.add("Hufflepuff");
+        houses.add("Ravenclaw");
+        houses.add("Slytherin");
+		String searchHouse = "Gryffindor";
+		info = null;
+		for(int i = 0;i<jsa.size();i++){
+            JSONObject json = (JSONObject)jsa.get(i);
+            if(json.get("name")==null || json.get("house")==null){
+                info = "Wrong Source: does not have house or name attribute";
+                break;
+            }
+            else{
+                if(json.get("house").toString().contains(searchHouse)) {
+                    if (info == null) info = "name: ";
+                    else info += "name: ";
+                    info+= json.get("name") + "\n";
+                }
+            }
+
+        }
+		System.out.print(info);
+
 		
 	}	
 }
