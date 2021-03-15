@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\yinfa\\aws-sdk-android-samples\\HPApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-en-rAU\\values-en-rAU.xml",
+            "outputFile": "C:\\Users\\yinfa\\Harry-Potter-Characters-Parser\\HPApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-en-rAU\\values-en-rAU.xml",
             "map": [
                 {
                     "source": "C:\\Users\\yinfa\\.gradle\\caches\\transforms-2\\files-2.1\\0d69aea288bd9c77afa4f8afd7c35fe5\\appcompat-1.2.0\\res\\values-en-rAU\\values-en-rAU.xml",

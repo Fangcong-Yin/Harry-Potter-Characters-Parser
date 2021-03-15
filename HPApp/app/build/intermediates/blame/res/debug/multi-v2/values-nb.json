@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\yinfa\\aws-sdk-android-samples\\HPApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-nb\\values-nb.xml",
+            "outputFile": "C:\\Users\\yinfa\\Harry-Potter-Characters-Parser\\HPApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-nb\\values-nb.xml",
             "map": [
                 {
                     "source": "C:\\Users\\yinfa\\.gradle\\caches\\transforms-2\\files-2.1\\dd785f24378047182b1aacdcc6f28fd8\\core-1.3.1\\res\\values-nb\\values-nb.xml",

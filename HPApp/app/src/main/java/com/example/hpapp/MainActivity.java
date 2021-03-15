@@ -128,13 +128,7 @@ public class MainActivity extends AppCompatActivity {
     public void makeNetworkSearchQuery(){
         String searchTerm = mSearchTermEditText.getText().toString();
         //If the user is searching for a character name, do the following:
-        if(!houses.contains(searchTerm)){
-            new FetchNetworkData().execute(searchTerm);
-        }
-        //TO-DO: if the user is searching for the house name
-        else{
-            mSearchResultsDisplay.setText("You are searching for the houses!\n\n");
-        }
+        new FetchNetworkData().execute(searchTerm);
 
 
     }
@@ -150,11 +144,16 @@ public class MainActivity extends AppCompatActivity {
             String result= null;
             try{
                 //Get the information string from search
-                result = researchFromJson(searchTerm);
+                if(!houses.contains(searchTerm)){
+                    result = researchFromJson(searchTerm);
+                }else{
+                    result = getCharacterNamesHouse(searchTerm);
+                }
+
             }catch(Exception e){
                 e.printStackTrace();
             }
-            return result;//
+            return result;
         }
 
         @Override
@@ -211,6 +210,7 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
             return null;
         }
+
         String info = null;
         //traverse through the json
         for(int i = 0;i<jsa.size();i++){
@@ -224,5 +224,33 @@ public class MainActivity extends AppCompatActivity {
         }
         return info;
     }
+    public String getCharacterNamesHouse (String searchHouse){
+        JSONArray jsa = null;
+        try{
+            //Get the json from the url
+            jsa=readJsonFromURL(urlString);
+        }catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }
 
+        String info = null;
+        //traverse through the json
+        for(int i = 0;i<jsa.size();i++){
+            JSONObject json = (JSONObject)jsa.get(i);
+            if(json.get("name")==null || json.get("house")==null){
+                info = "Wrong Source: does not have house or name attribute";
+                break;
+            }
+            else{
+                if(json.get("house").toString().contains(searchHouse)) {
+                    if (info == null) info = "name: ";
+                    else info += "name: ";
+                    info+= json.get("name") + "\n";
+                }
+            }
+
+        }
+        return info;
+    }
 }
