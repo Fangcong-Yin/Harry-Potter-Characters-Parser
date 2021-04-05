@@ -1,5 +1,6 @@
 import os
 import json
+
 class hp_database:
     def __init__(self):
         #Each entry of the list is a dictionary of a character
@@ -17,6 +18,19 @@ class hp_database:
                     info[key] = characters[key]
             self.hp_data.append(info)
         f.close()
+
+    def get_chars(self):
+        # Get all characters from the list
+        return self.hp_data
+
+    def get_chars(self, mid):
+        # Get a specific character from mid
+        try:
+            char = self.hp_data[mid]
+        except Exception as ex:
+            char = None
+        return char
+
 if __name__ == "__main__":
     hp = hp_database()
     file_name = 'characters.json'
