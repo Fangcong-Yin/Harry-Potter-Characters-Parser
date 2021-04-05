@@ -23,7 +23,7 @@ class hp_database:
         # Get all characters from the list
         return self.hp_data
 
-    def get_chars(self, mid):
+    def get_char(self, mid):
         # Get a specific character from mid
         try:
             char = self.hp_data[mid]
