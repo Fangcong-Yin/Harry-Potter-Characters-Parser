@@ -23,19 +23,19 @@ class hp_database:
         # Get all characters from the list
         return self.hp_data
 
-    def get_char(self, mid):
+    def get_char(self, cid):
         # Get a specific character from mid
         try:
-            char = self.hp_data[mid]
+            char = self.hp_data[cid]
         except Exception as ex:
             char = None
         return char
     
-    def set_char(self, mid, character):
-        self.hp_data[mid] = character # not sure what this will do for a id bigger than the current length of the list
+    def set_char(self, cid, character):
+        self.hp_data[cid] = character # not sure what this will do for a id bigger than the current length of the list
     
-    def delete_char(self, mid):
-        del(self.hp_data[mid])
+    def delete_char(self, cid):
+        del(self.hp_data[cid])
 
 if __name__ == "__main__":
     hp = hp_database()
