@@ -30,6 +30,12 @@ class hp_database:
         except Exception as ex:
             char = None
         return char
+    
+    def set_char(self, mid, character):
+        self.hp_data[mid] = character # not sure what this will do for a id bigger than the current length of the list
+    
+    def delete_char(self, mid):
+        del(self.hp_data[mid])
 
 if __name__ == "__main__":
     hp = hp_database()
