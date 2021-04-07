@@ -123,6 +123,11 @@ class HPController(object):
 
 		output['result'] = 'error'
 		output['message'] = 'No character named ' + char_name + 'was found.'
-
+		
+	def PUT_RESET(self):
+		output = {'result' : 'success'}
+		
+		self.hpdb.load_hp_data('characters.json')
+		
 		return json.dumps(output)
 
