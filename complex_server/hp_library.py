@@ -33,9 +33,15 @@ class hp_database:
     
     def set_char(self, cid, character):
         self.hp_data[cid] = character # not sure what this will do for a id bigger than the current length of the list
+        
+    def add_char(self, char):
+        self.hp_data.append(char)
     
     def delete_char(self, cid):
         del(self.hp_data[cid])
+        
+    def clear_list(self):
+        self.hp_data = list()
 
 if __name__ == "__main__":
     hp = hp_database()
