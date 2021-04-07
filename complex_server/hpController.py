@@ -43,7 +43,7 @@ class HPController(object):
 			for char in self.hpdb.get_chars():
 				i += 1
 				char['id'] = i
-				output['movies'].append(char)
+				output['characters'].append(char)
 
 		except Exception as ex:
 			output['result'] = 'error'
