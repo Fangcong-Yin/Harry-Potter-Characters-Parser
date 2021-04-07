@@ -3,8 +3,7 @@ import re, json
 from hp_library import hp_database
 
 class HPController(object):
-
-	def __init__(self, hpdb=None):
+        def __init__(self, hpdb=None):
 		if hpdb is None:
 			self.hpdb = hp_database()
 		else:
