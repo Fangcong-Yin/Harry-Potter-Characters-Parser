@@ -30,13 +30,13 @@ def start_service():
     #put_index
     dispatcher.connect('hp_put_cid','/hp/:cid', controller=hpController, action='PUT_CID', conditions=dict(method=['PUT']))
     #put_index
-    dispatcher.connect('hp_reset_data','/reset/', controller=hpController, action='PUT_RESET', conditions=dict(method=['PUT']))
+    dispatcher.connect('hp_reset_data','/hp/reset/', controller=hpController, action='PUT_RESET', conditions=dict(method=['PUT']))
 
     # default OPTIONS handler for CORS, all direct to the same place
     dispatcher.connect('hp_options', '/hp/', controller=optionsController, action='OPTIONS', conditions=dict(method=['OPTIONS']))
     dispatcher.connect('hp_cid_options', '/hp/:key', controller=optionsController, action='OPTIONS', conditions=dict(method=['OPTIONS']))
     dispatcher.connect('hp_name_options', '/hp/:cid', controller=optionsController, action='OPTIONS', conditions=dict(method=['OPTIONS']))
-    dispatcher.connect('hp_reset_options', '/reset/', controller=optionsController, action='OPTIONS', conditions=dict(method=['OPTIONS']))
+    dispatcher.connect('hp_reset_options', '/hp/reset/', controller=optionsController, action='OPTIONS', conditions=dict(method=['OPTIONS']))
     #set up configuration
     conf = {
         'global' : {
