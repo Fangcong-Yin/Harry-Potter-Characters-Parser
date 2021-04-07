@@ -7,7 +7,7 @@ class TestChars(unittest.TestCase):
     SITE_URL = 'http://localhost:51040'
     print("Testing for server: " + SITE_URL)
     CHARS_URL = SITE_URL + '/hp/'
-    RESET_URL = SITE_URL + '/reset/'
+    RESET_URL = SITE_URL + '/hp/reset/'
 
     def reset_data(self):
         r = requests.put(self.RESET_URL)
