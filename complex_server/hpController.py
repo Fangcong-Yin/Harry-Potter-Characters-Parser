@@ -11,14 +11,6 @@ class HPController(object):
 			self.hpdb = hpdb
 
 		self.hpdb.load_hp_data('characters.json')
-		
-	def GET_KEY(self, key):
-		try:
-			cid = int(key)
-			GET_CID(self, cid)
-		except ValueError as e:
-			GET_NAME(self, key)
-
 
 	def GET_CID(self, char_id):
 		output = {'result' : 'success'}
@@ -93,13 +85,6 @@ class HPController(object):
 			output['message'] = str(ex)
 
 		return json.dumps(output)
-	
-	def DELETE_KEY(self, key):
-		try:
-			cid = int(key)
-			DELETE_CID(self, cid)
-		except ValueError as e:
-			DELETE_NAME(self, key)
 
 	def DELETE_CID(self, char_id):
 		output = {'result' : 'success'}

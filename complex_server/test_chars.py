@@ -22,7 +22,7 @@ class TestChars(unittest.TestCase):
     def test_get_cid(self):
         self.reset_data()
         cid = 1
-        r = requests.get(self.CHARS_URL + str(cid))
+        r = requests.get(self.CHARS_URL + 'cid/' + str(cid))
         self.assertTrue(self.is_json(r.content.decode()))
         resp = json.loads(r.content.decode())
 
@@ -35,15 +35,16 @@ class TestChars(unittest.TestCase):
     def test_get_name(self):
         self.reset_data()
         name = 'harrypotter'
-        r = requests.get(self.CHARS_URL + name)
+        r = requests.get(self.CHARS_URL + 'name/' + name)
         self.assertTrue(self.is_json(r.content.decode()))
         resp = json.loads(r.content.decode())
+        testchar = resp['character']
 
-        self.assertEqual(resp['name'], 'Harry Potter')
-        self.assertEqual(resp['species'], 'human')
-        self.assertEqual(resp['gender'], 'male')
-        self.assertEqual(resp['house'], 'Gryffindor')
-        self.assertEqual(resp['actor'], 'Daniel Radcliffe')
+        self.assertEqual(testchar['name'], 'Harry Potter')
+        self.assertEqual(testchar['species'], 'human')
+        self.assertEqual(testchar['gender'], 'male')
+        self.assertEqual(testchar['house'], 'Gryffindor')
+        self.assertEqual(testchar['actor'], 'Daniel Radcliffe')
 
     def test_get_index(self):
         self.reset_data()
@@ -52,7 +53,8 @@ class TestChars(unittest.TestCase):
         resp = json.loads(r.content.decode())
 
         testchar = {}
-        testchar = resp[0]
+        chars = resp['characters']
+        testchar = chars[0]
 
         self.assertEqual(testchar['name'], 'Harry Potter')
         self.assertEqual(testchar['species'], 'human')
@@ -63,7 +65,7 @@ class TestChars(unittest.TestCase):
     def test_put_cid(self):
         self.reset_data()
         cid = 1
-        r = requests.get(self.CHARS_URL + str(cid))
+        r = requests.get(self.CHARS_URL + 'cid/' + str(cid))
         self.assertTrue(self.is_json(r.content.decode()))
         resp = json.loads(r.content.decode())
         self.assertEqual(resp['name'], 'Harry Potter')
@@ -106,26 +108,26 @@ class TestChars(unittest.TestCase):
         resp = json.loads(r.content.decode())
         self.assertEqual(resp['result'], 'success')
 
-        r = requests.get(self.CHARS_URL + str(10))
+        r = requests.get(self.CHARS_URL + 'name/' + 'abc')
         self.assertTrue(self.is_json(r.content.decode()))
         resp = json.loads(r.content.decode())
-        self.assertEqual(resp['name'], c['name'])
-        self.assertEqual(resp['species'], c['species'])
-        self.assertEqual(resp['gender'], c['gender'])
-        self.assertEqual(resp['house'], c['house'])
-        self.assertEqual(resp['actor'], c['actor'])
+        testchar = resp['character']
+        self.assertEqual(testchar['name'], c['name'])
+        self.assertEqual(testchar['species'], c['species'])
+        self.assertEqual(testchar['gender'], c['gender'])
+        self.assertEqual(testchar['house'], c['house'])
+        self.assertEqual(testchar['actor'], c['actor'])
 
     def test_delete_cid(self):
         self.reset_data()
         cid = 1
 
-        m = {}
-        r = requests.delete(self.chars_URL + str(cid), data = json.dumps(m))
+        r = requests.delete(self.CHARS_URL + 'cid/' + str(cid))
         self.assertTrue(self.is_json(r.content.decode()))
         resp = json.loads(r.content.decode())
         self.assertEqual(resp['result'], 'success')
 
-        r = requests.get(self.chars_URL + str(cid))
+        r = requests.get(self.CHARS_URL + str(cid))
         self.assertTrue(self.is_json(r.content.decode()))
         resp = json.loads(r.content.decode())
         self.assertEqual(resp['result'], 'error')
@@ -135,12 +137,12 @@ class TestChars(unittest.TestCase):
         name = 'harrypotter'
 
         m = {}
-        r = requests.delete(self.chars_URL + str(cid), data = json.dumps(m))
+        r = requests.delete(self.CHARS_URL + 'name/' + name, data = json.dumps(m))
         self.assertTrue(self.is_json(r.content.decode()))
         resp = json.loads(r.content.decode())
         self.assertEqual(resp['result'], 'success')
 
-        r = requests.get(self.chars_URL + str(cid))
+        r = requests.get(self.CHARS_URL + 'name/' + name)
         self.assertTrue(self.is_json(r.content.decode()))
         resp = json.loads(r.content.decode())
         self.assertEqual(resp['result'], 'error')
@@ -157,7 +159,7 @@ class TestChars(unittest.TestCase):
         r = requests.get(self.CHARS_URL)
         self.assertTrue(self.is_json(r.content.decode()))
         resp = json.loads(r.content.decode())
-        self.assertFalse(resp)
+        self.assertEqual(resp['characters'], [])
 
 if __name__ == "__main__":
     unittest.main()
