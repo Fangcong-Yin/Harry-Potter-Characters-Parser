@@ -4,14 +4,13 @@ import json
 
 class TestChars(unittest.TestCase):
 
-    SITE_URL = 'http://localhost:510XX' # replace with your assigned port id
+    SITE_URL = 'http://localhost:51040'
     print("Testing for server: " + SITE_URL)
-    CHARS_URL = SITE_URL + '/chars/'
+    CHARS_URL = SITE_URL + '/hp/'
     RESET_URL = SITE_URL + '/reset/'
 
     def reset_data(self):
-        m = {}
-        r = requests.put(self.RESET_URL, data = json.dumps(m))
+        r = requests.put(self.RESET_URL)
 
     def is_json(self, resp):
         try:
