@@ -123,6 +123,7 @@ class HPController(object):
 
 		output['result'] = 'error'
 		output['message'] = 'No character named ' + char_name + 'was found.'
+		return json.dumps(output)
 		
 	def PUT_RESET(self):
 		output = {'result' : 'success'}
