@@ -3,7 +3,8 @@ import re, json
 from hp_library import hp_database
 
 class HPController(object):
-        def __init__(self, hpdb=None):
+
+	def __init__(self, hpdb=None):
 		if hpdb is None:
 			self.hpdb = hp_database()
 		else:
@@ -52,7 +53,7 @@ class HPController(object):
 
 	def GET_NAME(self, char_name):
 		output = {'result' : 'success'}
-		
+
 		for char in self.hpdb.get_chars():
 			if char['name'].replace(' ', '').lower() == char_name:
 				output['character'] = char
@@ -60,9 +61,9 @@ class HPController(object):
 
 		output['result'] = 'error'
 		output['message'] = 'No character named ' + char_name + 'was found.'
-		
+
 		return json.dumps(output)
-		
+
 	def PUT_CID(self, char_id):
 		output = {'result' : 'success'}
 		char_id = int(char_id)
@@ -122,5 +123,6 @@ class HPController(object):
 
 		output['result'] = 'error'
 		output['message'] = 'No character named ' + char_name + 'was found.'
-		
+
 		return json.dumps(output)
+
