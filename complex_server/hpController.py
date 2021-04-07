@@ -82,7 +82,7 @@ class HPController(object):
 			self.hpdb.add_char(char)
 
 		except Exception as ex:
-			output['result'] = 'failure'
+			output['result'] = 'error'
 			output['message'] = str(ex)
 
 		return json.dumps(output)
@@ -95,7 +95,7 @@ class HPController(object):
 		try:
 			self.hpdb.delete_char(char_id)
 		except Exception as ex:
-			output['result'] = 'failure'
+			output['result'] = 'error'
 			output['message'] = str(ex)
 
 		return json.dumps(output)
@@ -106,7 +106,7 @@ class HPController(object):
 		try:
 			self.hpdb.clear_list()
 		except Exception as ex:
-			output['result'] ='failure'
+			output['result'] ='error'
 			output['message'] = str(ex)
 
 		return json.dumps(output)
