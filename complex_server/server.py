@@ -27,18 +27,20 @@ def start_service():
     dispatcher.connect('hp_post_new','/hp/', controller=hpController, action='POST_INDEX', conditions=dict(method=['POST']))
     #put_index
     dispatcher.connect('hp_put_cid','/hp/:cid', controller=hpController, action='PUT_CID', conditions=dict(method=['PUT']))
-    #connect more resources to event handlers here
+    #put_index
+    dispatcher.connect('hp_reset_data','/hp/reset/', controller=hpController, action='PUT_RESET', conditions=dict(method=['PUT']))
 
     # default OPTIONS handler for CORS, all direct to the same place
     dispatcher.connect('hp_options', '/hp/', controller=optionsController, action='OPTIONS', conditions=dict(method=['OPTIONS']))
     dispatcher.connect('hp_cid_options', '/hp/:cid', controller=optionsController, action='OPTIONS', conditions=dict(method=['OPTIONS']))
     dispatcher.connect('hp_name_options', '/hp/:char_name', controller=optionsController, action='OPTIONS', conditions=dict(method=['OPTIONS']))
+    dispatcher.connect('hp_reset_options', '/hp/reset/', controller=optionsController, action='OPTIONS', conditions=dict(method=['OPTIONS']))
     #set up configuration
     conf = {
         'global' : {
             'server.socket_host' : 'localhost', #'student04.cse.nd.edu',
             #Change this to the test port when testing
-            'server.socket_port' : 510XX,
+            'server.socket_port' : 51040,
             },
         '/' : {
             'request.dispatch' : dispatcher,
