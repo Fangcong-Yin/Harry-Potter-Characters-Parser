@@ -93,6 +93,13 @@ class HPController(object):
 			output['message'] = str(ex)
 
 		return json.dumps(output)
+	
+	def DELETE_KEY(self, key):
+		try:
+			cid = int(key)
+			DELETE_CID(self, cid)
+		except ValueError as e:
+			DELETE_NAME(self, key)
 
 	def DELETE_CID(self, char_id):
 		output = {'result' : 'success'}
