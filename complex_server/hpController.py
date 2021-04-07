@@ -12,28 +12,6 @@ class HPController(object):
 
 		self.hpdb.load_hp_data('characters.json')
 
-	# def GET_CID(self, char_id):
-	# 	output = {'result' : 'success'}
-	# 	char_id = int(char_id)
-
-	# 	try:
-	# 		i = 0
-	# 		for char in self.hpdb.get_chars():
-	# 			i += 1
-	# 			if i == char_id:
-	# 				char['id'] = char_id
-	# 				output['character'] = char
-	# 				return json.dumbs(output)
-
-	# 		output ['result'] = 'error'
-	# 		output['message'] = 'movie not found'
-
-	# 	except Exception as ex:
-	# 		output['result'] = 'error'
-	# 		output['message'] = str(ex)
-
-	# 	return json.dumps(output)
-
 	def GET_INDEX(self):
 		output = {'result' : 'success'}
 
@@ -49,19 +27,6 @@ class HPController(object):
 		except Exception as ex:
 			output['result'] = 'error'
 			output['message'] = str(ex)
-
-		return json.dumps(output)
-
-	# def GET_NAME(self, char_name):
-	# 	output = {'result' : 'success'}
-
-	# 	for char in self.hpdb.get_chars():
-	# 		if char['name'].replace(' ', '').lower() == char_name:
-	# 			output['character'] = char
-	# 			return json.dumps(output)
-
-	# 	output['result'] = 'error'
-	# 	output['message'] = 'No character named ' + char_name + 'was found.'
 
 		return json.dumps(output)
 
@@ -96,13 +61,13 @@ class HPController(object):
 
 		return json.dumps(output)
 
-	def PUT_CID(self, char_id):
+	def PUT_CID(self, cid):
 		output = {'result' : 'success'}
-		char_id = int(char_id)
+		cid = int(cid)
 
 		char = json.loads(cherrypy.request.body.read().decode('utf-8'))
 
-		self.hpdb.set_char(char_id, char)
+		self.hpdb.set_char(cid - 1, char)
 
 		return json.dumps(output)
 
@@ -119,18 +84,6 @@ class HPController(object):
 
 		return json.dumps(output)
 
-	# def DELETE_CID(self, char_id):
-	# 	output = {'result' : 'success'}
-
-	# 	char_id = int(char_id)
-
-	# 	try:
-	# 		self.hpdb.delete_char(char_id)
-	# 	except Exception as ex:
-	# 		output['result'] = 'error'
-	# 		output['message'] = str(ex)
-
-	# 	return json.dumps(output)
 
 	def DELETE_INDEX(self):
 		output = {'result' : 'success'}
@@ -142,20 +95,6 @@ class HPController(object):
 			output['message'] = str(ex)
 
 		return json.dumps(output)
-
-	# def DELETE_NAME(self, char_name):
-	# 	output = {'result' : 'success'}
-
-	# 	i = 0
-	# 	for char in self.hpdb.get_chars():
-	# 		i += 1
-	# 		if char['name'].replace(' ', '').lower() == char_name:
-	# 			self.hpdb.delete_char(i)
-	# 			return json.dumps(output)
-
-	# 	output['result'] = 'error'
-	# 	output['message'] = 'No character named ' + char_name + 'was found.'
-	# 	return json.dumps(output)
 
 	def DELETE_KEY(self, key):
 		output = {'result' : 'success'}

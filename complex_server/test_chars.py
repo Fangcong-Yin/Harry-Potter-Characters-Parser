@@ -69,7 +69,6 @@ class TestChars(unittest.TestCase):
         r = requests.get(self.CHARS_URL + str(cid))
         self.assertTrue(self.is_json(r.content.decode()))
         resp = json.loads(r.content.decode())
-        print(resp)
         testchar = resp['character']
 
         self.assertEqual(testchar['name'], 'Harry Potter')
@@ -85,7 +84,6 @@ class TestChars(unittest.TestCase):
         c['house'] = 'Hufflepuff'
         c['actor'] = 'ABC'
         r = requests.put(self.CHARS_URL + str(cid), data = json.dumps(c))
-        print(r.content)
         self.assertTrue(self.is_json(r.content.decode()))
         resp = json.loads(r.content.decode())
         self.assertEqual(resp['result'], 'success')
@@ -93,11 +91,12 @@ class TestChars(unittest.TestCase):
         r = requests.get(self.CHARS_URL + str(cid))
         self.assertTrue(self.is_json(r.content.decode()))
         resp = json.loads(r.content.decode())
-        self.assertEqual(resp['name'], c['name'])
-        self.assertEqual(resp['species'], c['species'])
-        self.assertEqual(resp['gender'], c['gender'])
-        self.assertEqual(resp['house'], c['house'])
-        self.assertEqual(resp['actor'], c['actor'])
+        testchar = resp['character']
+        self.assertEqual(testchar['name'], c['name'])
+        self.assertEqual(testchar['species'], c['species'])
+        self.assertEqual(testchar['gender'], c['gender'])
+        self.assertEqual(testchar['house'], c['house'])
+        self.assertEqual(testchar['actor'], c['actor'])
 
     def test_post_index(self):
         self.reset_data()
