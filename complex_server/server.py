@@ -1,7 +1,7 @@
 import routes
 import cherrypy
 #Change this to the class name of our controller 
-from hp_controller import HpController 
+from hpController import HPController 
 
 def start_service():
     #Change this to the class name of our controller 
