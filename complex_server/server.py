@@ -5,36 +5,38 @@ from hpController import HPController
 
 def start_service():
     #Change this to the class name of our controller 
-    hpController = HpController()
+    hpController = HPController()
 
     #create dispatcher
     dispatcher = cherrypy.dispatch.RoutesDispatcher()
 
     #use dispatcher to connect resources to event handlers
     #connect(out_tag, http resource, class object with handler, event handler name, what type of HTTP request to serve)
-    dispatcher.connect('hp_get_cid','/hp/:cid', controller=hpController, action='GET_CID', conditions=dict(method=['GET']))
+    #dispatcher.connect('hp_get_cid','/hp/:cid', controller=hpController, action='GET_CID', conditions=dict(method=['GET']))
     #get_index
     dispatcher.connect('hp_get_all','/hp/', controller=hpController, action='GET_INDEX', conditions=dict(method=['GET']))
     #get_name
-    dispatcher.connect('hp_get_character_name','/hp/:char_name', controller=hpController, action='GET_NAME', conditions=dict(method=['GET']))
+    #dispatcher.connect('hp_get_character_name','/hp/:char_name', controller=hpController, action='GET_NAME', conditions=dict(method=['GET']))
+    dispatcher.connect('hp_get_character_name','/hp/:key', controller=hpController, action='GET_KEY', conditions=dict(method=['GET']))
     #delete_cid
-    dispatcher.connect('hp_delete_key','/hp/:cid', controller=hpController, action='DELETE_CID', conditions=dict(method=['DELETE']))
+    #dispatcher.connect('hp_delete_key','/hp/:cid', controller=hpController, action='DELETE_CID', conditions=dict(method=['DELETE']))
+    dispatcher.connect('hp_delete_key','/hp/:key', controller=hpController, action='DELETE_KEY', conditions=dict(method=['DELETE']))
     #delete_all
     dispatcher.connect('hp_delete_all','/hp/', controller=hpController, action='DELETE_INDEX', conditions=dict(method=['DELETE']))
     #delete_name
-    dispatcher.connect('hp_delete_character_name','/hp/:char_name', controller=hpController, action='DELETE_NAME', conditions=dict(method=['DELETE']))
+    #dispatcher.connect('hp_delete_character_name','/hp/:char_name', controller=hpController, action='DELETE_NAME', conditions=dict(method=['DELETE']))
     #post_new_character
     dispatcher.connect('hp_post_new','/hp/', controller=hpController, action='POST_INDEX', conditions=dict(method=['POST']))
     #put_index
     dispatcher.connect('hp_put_cid','/hp/:cid', controller=hpController, action='PUT_CID', conditions=dict(method=['PUT']))
     #put_index
-    dispatcher.connect('hp_reset_data','/hp/reset/', controller=hpController, action='PUT_RESET', conditions=dict(method=['PUT']))
+    dispatcher.connect('hp_reset_data','/reset/', controller=hpController, action='PUT_RESET', conditions=dict(method=['PUT']))
 
     # default OPTIONS handler for CORS, all direct to the same place
     dispatcher.connect('hp_options', '/hp/', controller=optionsController, action='OPTIONS', conditions=dict(method=['OPTIONS']))
-    dispatcher.connect('hp_cid_options', '/hp/:cid', controller=optionsController, action='OPTIONS', conditions=dict(method=['OPTIONS']))
-    dispatcher.connect('hp_name_options', '/hp/:char_name', controller=optionsController, action='OPTIONS', conditions=dict(method=['OPTIONS']))
-    dispatcher.connect('hp_reset_options', '/hp/reset/', controller=optionsController, action='OPTIONS', conditions=dict(method=['OPTIONS']))
+    dispatcher.connect('hp_cid_options', '/hp/:key', controller=optionsController, action='OPTIONS', conditions=dict(method=['OPTIONS']))
+    dispatcher.connect('hp_name_options', '/hp/:cid', controller=optionsController, action='OPTIONS', conditions=dict(method=['OPTIONS']))
+    dispatcher.connect('hp_reset_options', '/reset/', controller=optionsController, action='OPTIONS', conditions=dict(method=['OPTIONS']))
     #set up configuration
     conf = {
         'global' : {
