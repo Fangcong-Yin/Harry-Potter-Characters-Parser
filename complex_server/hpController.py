@@ -11,6 +11,13 @@ class HPController(object):
 			self.hpdb = hpdb
 
 		self.hpdb.load_hp_data('characters.json')
+		
+	def GET_KEY(self, key):
+		try:
+			cid = int(key)
+			GET_CID(self, cid)
+		except ValueError as e:
+			GET_NAME(self, key)
 
 
 	def GET_CID(self, char_id):
