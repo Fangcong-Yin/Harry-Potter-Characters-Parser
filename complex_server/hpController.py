@@ -48,12 +48,13 @@ class HPController(object):
 
 		except ValueError as ex:
 			for char in self.hpdb.get_chars():
+				key = key.replace(' ', '').lower()
 				if char['name'].replace(' ', '').lower() == key:
 					output['character'] = char
 					return json.dumps(output)
 
 			output['result'] = 'error'
-			output['message'] = 'No character named ' + char_name + 'was found.'
+			output['message'] = 'No character was found.'
 
 		except Exception as ex:
 			output['result'] = 'error'
